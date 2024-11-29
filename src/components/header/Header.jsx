@@ -6,16 +6,16 @@ import { FiSearch } from 'react-icons/fi'
 import { IoChevronDownOutline, IoMenu, IoMoon, IoSunny } from 'react-icons/io5'
 import { RiCoupon3Line, RiTv2Fill } from 'react-icons/ri'
 import { HiMiniDeviceTablet } from 'react-icons/hi2'
-const Header = () => {
-  const [DarcMode, setDarcMode] = useState(false)
-
+const Header = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
   useEffect(() => {
     const value = localStorage.getItem('theme')
     if (value) {
       document.body.classList.add(value)
     }
   }, [])
-
+  const toggleSidebar = () => {
+    setSidebar(!sidebar)
+  }
   const darkmode = () => {
     setDarcMode(!DarcMode)
     document.body.classList.toggle('dark')
@@ -72,17 +72,20 @@ const Header = () => {
             onClick={() => darkmode()}
             className='w-10 h-10 rounded-3xl border border-gray-400 flex items-center justify-center max-lg:w-8 max-lg:h-8 max-md:hidden'
           >
-            {DarcMode ?
+            {DarcMode ? (
               <IoSunny className='text-navColor text-2xl max-lg:text-sm' />
-             :
+            ) : (
               <IoMoon className='text-navColor text-2xl max-lg:text-sm' />
-            }
+            )}
           </button>
 
           <button className='w-44 h-12 bg-red text-lg rounded-full text-white hover:bg-transparent hover:text-red hover:border border-red duration-500 max-xl:max-w-20 max-xl:text-sm max-lg:w-20 max-lg:h-8 max-md:hidden '>
             Войти
           </button>
-          <IoMenu className='hidden text-red text-2xl max-md:block' />
+          <IoMenu
+            onClick={() => toggleSidebar(true)}
+            className='hidden text-red text-2xl cursor-pointer max-md:block'
+          />
         </div>
       </div>
     </header>

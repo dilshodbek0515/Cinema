@@ -1,15 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../pages/home/Home'
 import Layout from '../pages/layout/Layout'
 import Sessions from '../pages/sessions/Sessions'
 import Tickets from '../pages/tickets/Tickets'
 import Search from '../pages/search/Search'
+import Sidebar from '../components/sidebar/Sidebar'
 const Index = () => {
+  const [sidebar, setSidebar] = useState(false)
+  const [DarcMode, setDarcMode] = useState(false)
   return (
-    <div>
+    <div className='relative'>
+      <Sidebar
+        DarcMode={DarcMode}
+        setDarcMode={setDarcMode}
+        sidebar={sidebar}
+        setSidebar={setSidebar}
+      />
       <Routes>
-        <Route path='/' element={<Layout />}>
+        <Route
+          path='/'
+          element={
+            <Layout
+              DarcMode={DarcMode}
+              setDarcMode={setDarcMode}
+              sidebar={sidebar}
+              setSidebar={setSidebar}
+            />
+          }
+        >
           <Route path='/' element={<Home />} />
           <Route path='/sessions' element={<Sessions />} />
           <Route path='/tickets' element={<Tickets />} />
