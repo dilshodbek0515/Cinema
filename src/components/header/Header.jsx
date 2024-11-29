@@ -1,12 +1,14 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import logo from '../../assets/images/logo.svg'
 import flag from '../../assets/images/RU.png'
 import { FiSearch } from 'react-icons/fi'
-import { IoChevronDownOutline, IoMenu, IoSunny } from 'react-icons/io5'
+import { IoChevronDownOutline, IoMenu, IoMoon, IoSunny } from 'react-icons/io5'
 import { RiCoupon3Line, RiTv2Fill } from 'react-icons/ri'
 import { HiMiniDeviceTablet } from 'react-icons/hi2'
 const Header = () => {
+  const [DarcMode, setDarcMode] = useState(false)
+
   useEffect(() => {
     const value = localStorage.getItem('theme')
     if (value) {
@@ -15,6 +17,7 @@ const Header = () => {
   }, [])
 
   const darkmode = () => {
+    setDarcMode(!DarcMode)
     document.body.classList.toggle('dark')
     if (document.body.classList.contains('dark')) {
       localStorage.setItem('theme', 'dark')
@@ -30,7 +33,7 @@ const Header = () => {
         </Link>
         <ul className='flex gap-20 max-xl:gap-5 max-md:hidden '>
           <li className='font-medium text-xs text-navColor'>
-            <NavLink to={'/poster'}>
+            <NavLink to={'/'}>
               <span className='flex flex-col items-center justify-center gap-2 text-lg max-lg:text-sm dark:text-black'>
                 <RiTv2Fill className='text-2xl' /> Афиша
               </span>
@@ -64,12 +67,18 @@ const Header = () => {
             <span className='text-navColor dark:text-black'>Ру</span>
             <IoChevronDownOutline className='text-navColor dark:text-black' />
           </div>
+
           <button
             onClick={() => darkmode()}
             className='w-10 h-10 rounded-3xl border border-gray-400 flex items-center justify-center max-lg:w-8 max-lg:h-8 max-md:hidden'
           >
-            <IoSunny className='text-navColor text-2xl max-lg:text-sm' />
+            {DarcMode ?
+              <IoSunny className='text-navColor text-2xl max-lg:text-sm' />
+             :
+              <IoMoon className='text-navColor text-2xl max-lg:text-sm' />
+            }
           </button>
+
           <button className='w-44 h-12 bg-red text-lg rounded-full text-white hover:bg-transparent hover:text-red hover:border border-red duration-500 max-xl:max-w-20 max-xl:text-sm max-lg:w-20 max-lg:h-8 max-md:hidden '>
             Войти
           </button>
