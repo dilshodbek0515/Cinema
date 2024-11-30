@@ -1,7 +1,0 @@
-body::-webkit-scrollbar {
-    height: 0;
-}
-
-body::-webkit-scrollbar-thumb {
-    background: none;
-}
