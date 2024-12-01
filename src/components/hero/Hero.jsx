@@ -114,7 +114,7 @@ const Hero = () => {
           ))}
         </Swiper>
 
-        <section className='w-full bg-primary h-auto pb-20 dark:bg-gray-200 max-md:pb-5'>
+        <section className='w-full bg-primary h-auto pb-10 mt-24 dark:bg-gray-200 max-md:pb-5'>
           <div className='container h-auto p-5 flex flex-col gap-5'>
             <div className='flex justify-between'>
               <p className='text-2xl text-white dark:text-black max-sm:text-sm'>
@@ -171,7 +171,7 @@ const Hero = () => {
           </div>
         </section>
 
-        <Stack className='flex items-center justify-center mt-8 w-full'>
+        <Stack className='flex items-center justify-center w-full'>
           <MuiPagination
             className='max-w-96 py-3 rounded-lg'
             count={data?.total_pages > 500 ? 500 : data?.total_pages}
