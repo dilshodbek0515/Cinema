@@ -4,10 +4,14 @@ import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
+
+import 'swiper/css/pagination'
+import { Pagination as SwiperPagination } from 'swiper/modules'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
+
 import { useGetMovieQuery } from '../../redux/api/movieApi'
 import { MOVIE_LISTS } from '../../static'
-import Pagination from '@mui/material/Pagination'
+import MuiPagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { FaPlay } from 'react-icons/fa'
 
@@ -17,6 +21,7 @@ const Hero = () => {
   const [page, setPage] = useState(1)
   const [activeType, setActiveType] = useState('now_playing')
   const { data } = useGetMovieQuery({ type, params: { page } })
+  console.log(data)
 
   const handleChange = (event, value) => {
     setPage(value)
@@ -29,7 +34,7 @@ const Hero = () => {
   }
 
   return (
-    <main className='w-full flex flex-col bg-primary px-20 py-5 pb-20 dark:bg-gray-200 max-md:px-5 max-sm:px-4'>
+    <main className='w-full h-[1800px] flex flex-col bg-primary px-20 py-5 pb-20 dark:bg-gray-200 max-md:px-5 max-sm:px-4'>
       <div className='w-full h-20 p-5 flex gap-10 container max-lg:gap-5 max-sm:px-2 max-sm:gap-2'>
         {MOVIE_LISTS?.map(item => (
           <button
@@ -67,10 +72,13 @@ const Hero = () => {
                   alt=''
                 />
                 <div className='absolute z-10 left-[50%] translate-x-[-50%] bottom-8 flex gap-10 items-center justify-center flex-col'>
-                  <h3 className='text-4xl text-white font-medium'>
+                  <h3 className='text-4xl text-white font-medium max-sm:text-xl'>
                     {movie.title}
                   </h3>
-                  <button className='w-96 h-16 flex gap-3 items-center justify-center rounded-xl duration-500 bg-white text-primary hover:bg-transparent hover:border border-white hover:text-white hover:duration-500'>
+                  <div>
+                    <p className='text-xl text-white'>{movie.release_date}</p>
+                  </div>
+                  <button className='w-96 h-16 flex gap-3 items-center justify-center rounded-xl duration-500 bg-white text-primary hover:bg-transparent hover:border border-white hover:text-white hover:duration-500 max-sm:w-full px-20 max-[400px]:h-10'>
                     <FaPlay className='text-2xl' /> Смотреть
                   </button>
                 </div>
@@ -106,8 +114,65 @@ const Hero = () => {
           ))}
         </Swiper>
 
+        <section className='w-full bg-primary h-auto pb-20 dark:bg-gray-200 max-md:pb-5'>
+          <div className='container h-auto p-5 flex flex-col gap-5'>
+            <div className='flex justify-between'>
+              <p className='text-2xl text-white dark:text-black max-sm:text-sm'>
+                На неделе
+              </p>
+              <p className='text-2xl text-red max-sm:text-sm'>Показать все</p>
+            </div>
+            <div>
+              <Swiper
+                slidesPerView={1}
+                spaceBetween={10}
+                pagination={{
+                  clickable: true
+                }}
+                breakpoints={{
+                  '@0.00': {
+                    slidesPerView: 1,
+                    spaceBetween: 10
+                  },
+                  '@0.75': {
+                    slidesPerView: 2,
+                    spaceBetween: 15
+                  },
+                  '@1.0': {
+                    slidesPerView: 3,
+                    spaceBetween: 20
+                  },
+                  '@1.70': {
+                    slidesPerView: 5,
+                    spaceBetween: 50
+                  }
+                }}
+                modules={[SwiperPagination]}
+                className='w-full h-[600px] max-md:h-[500px]'
+              >
+                {data?.results?.map(movie => (
+                  <SwiperSlide className='w-72 h-[500px] rounded-lg max-lg:w-80'>
+                    <img
+                      className='w-full h-[450px] object-cover rounded-lg dark:bg-gray-50 max-lg:h-80'
+                      src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
+                      width={300}
+                      alt={movie.title}
+                    />
+                    <h2 className='text-3xl text-white mt-5 mb-2 dark:text-black max-2xl:text-lg'>
+                      {movie.title}
+                    </h2>
+                    <p className='text-sm text-gray-300 dark:text-black max-lg:text-[12px]'>
+                      {movie.popularity}
+                    </p>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        </section>
+
         <Stack className='flex items-center justify-center mt-8 w-full'>
-          <Pagination
+          <MuiPagination
             className='max-w-96 py-3 rounded-lg'
             count={data?.total_pages > 500 ? 500 : data?.total_pages}
             variant='outlined'
