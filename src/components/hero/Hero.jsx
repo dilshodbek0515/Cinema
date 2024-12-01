@@ -9,6 +9,7 @@ import { useGetMovieQuery } from '../../redux/api/movieApi'
 import { MOVIE_LISTS } from '../../static'
 import Pagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
+import { FaPlay } from 'react-icons/fa'
 
 const Hero = () => {
   const [type, setType] = useState('now_playing')
@@ -59,13 +60,20 @@ const Hero = () => {
               key={movie.id}
               className='flex items-center justify-center rounded-2xl max-md:rounded-md max-[500px]:h-52'
             >
-              <div className='w-full h-full'>
+              <div className='relative w-full h-full'>
                 <img
-                  className='w-full h-full'
-                  src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
-                  width={300}
-                  alt={movie.title}
+                  className='w-full h-full object-cover'
+                  src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
+                  alt=''
                 />
+                <div className='absolute z-10 left-[50%] translate-x-[-50%] bottom-8 flex gap-10 items-center justify-center flex-col'>
+                  <h3 className='text-4xl text-white font-medium'>
+                    {movie.title}
+                  </h3>
+                  <button className='w-96 h-16 flex gap-3 items-center justify-center rounded-xl duration-500 bg-white text-primary hover:bg-transparent hover:border border-white hover:text-white hover:duration-500'>
+                    <FaPlay className='text-2xl' /> Смотреть
+                  </button>
+                </div>
               </div>
             </SwiperSlide>
           ))}
