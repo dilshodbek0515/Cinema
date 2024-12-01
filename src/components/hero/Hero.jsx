@@ -21,7 +21,6 @@ const Hero = () => {
   const [page, setPage] = useState(1)
   const [activeType, setActiveType] = useState('now_playing')
   const { data } = useGetMovieQuery({ type, params: { page } })
-  console.log(data)
 
   const handleChange = (event, value) => {
     setPage(value)
@@ -126,20 +125,25 @@ const Hero = () => {
               <Swiper
                 slidesPerView={1}
                 spaceBetween={10}
+                slidesPerGroup={1}
                 pagination={{
                   clickable: true
                 }}
                 breakpoints={{
                   '@0.00': {
                     slidesPerView: 1,
-                    spaceBetween: 10
+                    spaceBetween: 5
                   },
                   '@0.75': {
                     slidesPerView: 2,
-                    spaceBetween: 15
+                    spaceBetween: 5
                   },
                   '@1.0': {
                     slidesPerView: 3,
+                    spaceBetween: 10
+                  },
+                  '@1.50': {
+                    slidesPerView: 4,
                     spaceBetween: 20
                   },
                   '@1.70': {
@@ -150,14 +154,21 @@ const Hero = () => {
                 modules={[SwiperPagination]}
                 className='w-full h-[600px] max-md:h-[500px]'
               >
-                {data?.results?.map(movie => (
-                  <SwiperSlide className='w-72 h-[500px] rounded-lg max-lg:w-80'>
-                    <img
-                      className='w-full h-[450px] object-cover rounded-lg dark:bg-gray-50 max-lg:h-80'
-                      src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
-                      width={300}
-                      alt={movie.title}
-                    />
+                {data?.results?.map((movie, index) => (
+                  <SwiperSlide
+                    key={index}
+                    className='w-72 h-[500px] rounded-lg max-lg:w-80'
+                  >
+                    <div className='w-full h-[400px]'>
+                      <img
+                        className='w-[100%] h-[100%] object-cover rounded-lg max-lg:h-80'
+                        src={
+                          import.meta.env.VITE_IMAGE_URL + movie.backdrop_path
+                        }
+                        width={300}
+                        alt={movie.title}
+                      />
+                    </div>
                     <h2 className='text-3xl text-white mt-5 mb-2 dark:text-black max-2xl:text-lg'>
                       {movie.title}
                     </h2>
