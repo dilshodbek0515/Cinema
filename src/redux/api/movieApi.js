@@ -8,8 +8,25 @@ export const movieApi = api.injectEndpoints({
         params
       }),
       providesTags: ['Movie']
+    }),
+    getMovieDiscover: build.query({
+      query: params => ({
+        url: `/discover/movie`,
+        params
+      }),
+      providesTags: ['Movie']
+    }),
+    getMovieDetail: build.query({
+      query: id => ({
+        url: `/movie/${id}`
+      }),
+      providesTags: ['Movie']
     })
   })
 })
 
-export const { useGetMovieQuery } = movieApi
+export const {
+  useGetMovieQuery,
+  useGetMovieDiscoverQuery,
+  useGetMovieDetailQuery
+} = movieApi

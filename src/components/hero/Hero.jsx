@@ -1,35 +1,46 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-
 import 'swiper/css/pagination'
 import { Pagination as SwiperPagination } from 'swiper/modules'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
-
 import { useGetMovieQuery } from '../../redux/api/movieApi'
 import { MOVIE_LISTS } from '../../static'
 import MuiPagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { FaPlay } from 'react-icons/fa'
+import { NavLink, useNavigate, useSearchParams } from 'react-router-dom'
 
 const Hero = () => {
-  const [type, setType] = useState('now_playing')
+  const [params, setParams] = useSearchParams()
+  const [type, setType] = useState(params.get('path') || 'now_playing')
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
-  const [page, setPage] = useState(1)
+  const [page, setPage] = useState(params.get('count') || 1)
   const [activeType, setActiveType] = useState('now_playing')
   const { data } = useGetMovieQuery({ type, params: { page } })
+  const naviagate = useNavigate()
+  
+  useEffect(() => {
+    if (!params.get('path')) {
+      setType('now_playing')
+    }
+  }, [params.get('path')])
 
   const handleChange = (event, value) => {
     setPage(value)
+    const p = new URLSearchParams(params)
+    p.set('count', value)
+    setParams(p)
   }
 
   const handleChangeType = path => {
     setType(path)
     setActiveType(path)
     setPage(1)
+    setParams({ path, count: 1 })
   }
 
   return (
@@ -67,7 +78,7 @@ const Hero = () => {
               <div className='relative w-full h-full'>
                 <img
                   className='w-full h-full object-cover'
-                  src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
+                  src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
                   alt=''
                 />
                 <div className='absolute z-10 left-[50%] translate-x-[-50%] bottom-8 flex gap-10 items-center justify-center flex-col'>
@@ -103,8 +114,8 @@ const Hero = () => {
             >
               <div className='w-full h-full'>
                 <img
-                  className='w-full h-full rounded-xl max-md:h-12 max-md:rounded-md max-[400px]:h-[40px]'
-                  src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
+                  className='w-full h-full object-cover rounded-xl max-md:h-12 max-md:rounded-md max-[400px]:h-[40px]'
+                  src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
                   width={300}
                   alt={movie.title}
                 />
@@ -119,7 +130,7 @@ const Hero = () => {
               <p className='text-2xl text-white dark:text-black max-sm:text-sm'>
                 На неделе
               </p>
-              <p className='text-2xl text-red max-sm:text-sm'>Показать все</p>
+              <NavLink to={"/sessions"} className='text-2xl text-red max-sm:text-sm'>Показать все</NavLink>
             </div>
             <div>
               <Swiper
@@ -159,21 +170,21 @@ const Hero = () => {
                     key={index}
                     className='w-72 h-[500px] rounded-lg max-lg:w-80'
                   >
-                    <div className='w-full h-[400px]'>
+                    <div className='w-full h-[400px] overflow-hidden rounded-lg'>
                       <img
-                        className='w-[100%] h-[100%] object-cover rounded-lg max-lg:h-80'
+                        onClick={() => naviagate(`/movie/${movie.id}`)}
+                        className='w-[100%] h-[100%] object-cover rounded-lg max-lg:h-80 hover:scale-110 duration-500 '
                         src={
                           import.meta.env.VITE_IMAGE_URL + movie.backdrop_path
                         }
-                        width={300}
                         alt={movie.title}
                       />
                     </div>
-                    <h2 className='text-3xl text-white mt-5 mb-2 dark:text-black max-2xl:text-lg'>
+                    <h2 className='text-2xl text-white mt-5 mb-2 dark:text-black max-2xl:text-lg'>
                       {movie.title}
                     </h2>
                     <p className='text-sm text-gray-300 dark:text-black max-lg:text-[12px]'>
-                      {movie.popularity}
+                      {movie.vote_average}
                     </p>
                   </SwiperSlide>
                 ))}
@@ -184,7 +195,7 @@ const Hero = () => {
 
         <Stack className='flex items-center justify-center w-full'>
           <MuiPagination
-            className='max-w-96 py-3 rounded-lg'
+            className='max-w-96 h-10 py-1 rounded-lg bg-slate-900 dark:bg-slate-300'
             count={data?.total_pages > 500 ? 500 : data?.total_pages}
             variant='outlined'
             color='primary'

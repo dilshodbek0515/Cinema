@@ -5,7 +5,7 @@ const baseQuery = async (args, api, extraOptions) => {
   const rawBaseQuery = fetchBaseQuery({
     baseUrl: import.meta.env.VITE_BASE_URL,
     prepareHeaders: headers => {
-      const token = import.meta.env.VITE_TOKEN 
+      const token = import.meta.env.VITE_TOKEN
       if (token) {
         headers.set('Authorization', `Bearer ${token}`)
       }
@@ -28,6 +28,6 @@ const baseQueryWithRetry = retry(baseQuery, { maxRetries: 0 })
 export const api = createApi({
   reducerPath: 'myApi',
   baseQuery: baseQueryWithRetry,
-  tagTypes: ['Movie', 'Category'],
+  tagTypes: ['Movie', 'Category', 'Genre'],
   endpoints: () => ({})
 })
