@@ -21,6 +21,12 @@ export const movieApi = api.injectEndpoints({
         url: `/movie/${id}`
       }),
       providesTags: ['Movie']
+    }),
+    getMovieSimilar: build.query({
+      query: id => ({
+        url: `/movie/${id}/images`
+      }),
+      providesTags: ['Movie']
     })
   })
 })
@@ -28,5 +34,6 @@ export const movieApi = api.injectEndpoints({
 export const {
   useGetMovieQuery,
   useGetMovieDiscoverQuery,
-  useGetMovieDetailQuery
+  useGetMovieDetailQuery,
+  useGetMovieSimilarQuery
 } = movieApi

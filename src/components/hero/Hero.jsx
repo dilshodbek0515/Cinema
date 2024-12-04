@@ -22,7 +22,7 @@ const Hero = () => {
   const [activeType, setActiveType] = useState('now_playing')
   const { data } = useGetMovieQuery({ type, params: { page } })
   const naviagate = useNavigate()
-  
+
   useEffect(() => {
     if (!params.get('path')) {
       setType('now_playing')
@@ -130,7 +130,12 @@ const Hero = () => {
               <p className='text-2xl text-white dark:text-black max-sm:text-sm'>
                 На неделе
               </p>
-              <NavLink to={"/sessions"} className='text-2xl text-red max-sm:text-sm'>Показать все</NavLink>
+              <NavLink
+                to={'/sessions'}
+                className='text-2xl text-red max-sm:text-sm'
+              >
+                Показать все
+              </NavLink>
             </div>
             <div>
               <Swiper

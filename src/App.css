@@ -8,10 +8,19 @@ body::-webkit-scrollbar-thumb {
 }
 
 .genres::-webkit-scrollbar {
- height: 10px;
+  height: 10px;
 }
 
 .genres::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: rgb(58, 56, 56);
+}
+
+.month::-webkit-scrollbar {
+  height: 10px;
+}
+
+.month::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: rgb(58, 56, 56);
 }
