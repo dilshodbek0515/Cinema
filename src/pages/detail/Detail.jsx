@@ -10,7 +10,7 @@ const Detail = () => {
   const [component, setComponent] = useState('bilet')
 
   return (
-    <div className='bg-primary w-full'>
+    <div className='bg-primary dark:bg-slate-200 w-full'>
       <div className='w-full min-h-screen relative'>
         <img
           className='w-full h-full object-cover bg-no-repeat absolute top-0 left-0'
@@ -33,7 +33,7 @@ const Detail = () => {
           </div>
         </div>
       </div>
-      <div className='w-full flex items-center justify-center bg-primary pt-20'>
+      <div className='w-full flex items-center justify-center bg-primary dark:bg-slate-200 pt-20'>
         <div className='w-96 h-auto flex justify-center items-center gap-2 rounded-xl max-sm:flex-col max-sm:gap-10'>
           <button
             className={`w-[50%] h-14 ${

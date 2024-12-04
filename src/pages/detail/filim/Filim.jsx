@@ -9,17 +9,17 @@ const Filim = () => {
       <div className='container px-10 flex items-center justify-center'>
         <div className='w-96 h-auto flex flex-col'>
           <div className='w-full flex justify-around'>
-            <div className='text-2xl text-white flex items-center'>
+            <div className='text-2xl text-white flex items-center dark:text-primary'>
               6.6
               <img src={single1} alt='img' />
             </div>
-            <div className='text-2xl text-white flex items-center'>
+            <div className='text-2xl text-white flex items-center dark:text-primary'>
               6.8
               <img src={single2} alt='img' />
             </div>
           </div>
           <div className='w-full flex flex-col gap-6 mt-14'>
-            <h2 className='text-2xl text-white'>Детали</h2>
+            <h2 className='text-2xl text-white dark:text-primary'>Детали</h2>
             <div className='flex justify-between'>
               <p className='text-sm text-navColor'>Продолжительность</p>
               <span className='text-sm text-navColor'>1ч 34м / 94 минут</span>
@@ -49,7 +49,7 @@ const Filim = () => {
           </div>
           <hr className='w-full bg-[#2D2D2D] my-10' />
           <div className='w-full flex flex-col gap-6 mt-2'>
-            <h2 className='text-2xl text-white'>В ролях</h2>
+            <h2 className='text-2xl text-white dark:text-primary'>В ролях</h2>
             <div className='flex justify-between'>
               <p className='text-sm text-navColor'>Джек Блэк</p>
               <span className='text-sm text-navColor'>Аквафина</span>
@@ -73,12 +73,12 @@ const Filim = () => {
           </div>
           <hr className='w-full bg-[#2D2D2D] my-10' />
           <div className='w-full flex flex-col gap-5'>
-            <h2 className='text-2xl text-white'>Сюжет</h2>
+            <h2 className='text-2xl text-white dark:text-primary'>Сюжет</h2>
             <p className='text-sm text-navColor w-72'>
               Продолжение приключений легендарного Воина Дракона, его верных
               друзей и наставника (часть вторая)
             </p>
-            <button className='w-full h-14 bg-red text-white duration-300 mt-5 flex items-center justify-center gap-3 text-xl rounded-lg hover:bg-transparent hover:text-red hover:border border-red hover:duration-300'>
+            <button className='w-full h-14 bg-red text-white duration-300 mt-5 flex items-center justify-center gap-3 text-xl rounded-lg hover:bg-transparent hover:text-red hover:border border-red hover:duration-300 dark:bg-slate-50 dark:text-primary dark:hover:text-red'>
               <RiCoupon3Fill /> Купить билет
             </button>
           </div>
