@@ -8,6 +8,7 @@ const Sessions = () => {
   const navigate = useNavigate()
   const [selectedGenre, setSelectedGenre] = useState([])
   const { data: genres } = useGetGenreQuery()
+  
   const { data, isError } = useGetMovieDiscoverQuery({
     with_genres: selectedGenre.join(',')
   })
@@ -51,7 +52,7 @@ const Sessions = () => {
       {!data?.total_results && (
         <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5'>
           <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary' />
-          <h2 className='text-navColor text-3xl dark:text-primary'>
+          <h2 className='text-navColor text-3xl dark:text-primary max-sm:text-lg'>
             Movie not found
           </h2>
         </div>

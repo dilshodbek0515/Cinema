@@ -3,7 +3,11 @@ import single1 from '../../../assets/images/single1.png'
 import single2 from '../../../assets/images/single2.png'
 import { RiCoupon3Fill } from 'react-icons/ri'
 import Similar from '../similar/Similar'
+import { useParams } from 'react-router-dom'
+import { useGetMovieDetailQuery } from '../../../redux/api/movieApi'
 const Filim = () => {
+  const { id } = useParams()
+  const { data } = useGetMovieDetailQuery(id)
   return (
     <div className='flex flex-col gap-20'>
       <div className='container px-10 flex items-center justify-center'>
@@ -26,25 +30,29 @@ const Filim = () => {
             </div>
             <div className='flex justify-between'>
               <p className='text-sm text-navColor'>Премьера</p>
-              <span className='text-sm text-navColor'>07 марта 2024</span>
+              <span className='text-sm text-navColor'>
+                {data?.release_date}
+              </span>
             </div>
             <div className='flex justify-between'>
               <p className='text-sm text-navColor'>Производство</p>
-              <span className='text-sm text-navColor'>США, Китай</span>
+              <span className='text-sm text-navColor'>
+                {data?.origin_country}
+              </span>
             </div>
             <div className='flex justify-between'>
               <p className='text-sm text-navColor'>Жанр</p>
-              <span className='text-sm text-navColor'>Фэнтези, Комедия</span>
+              <span className='text-sm text-navColor'>{data?.status}</span>
             </div>
             <div className='flex justify-between'>
               <p className='text-sm text-navColor'>Режиссер</p>
               <span className='text-sm text-navColor'>
-                Майк Митчелл, Стефани Стайн
+                {data?.original_title}
               </span>
             </div>
             <div className='flex justify-between'>
               <p className='text-sm text-navColor'>Возрастной рейтинг</p>
-              <span className='text-sm text-navColor'>6+</span>
+              <span className='text-sm text-navColor'>{data?.runtime}</span>
             </div>
           </div>
           <hr className='w-full bg-[#2D2D2D] my-10' />
