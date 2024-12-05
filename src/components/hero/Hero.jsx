@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { useGetMovieQuery } from '../../redux/api/movieApi'
-import { MOVIE_LISTS } from '../../static'
 import MuiPagination from '@mui/material/Pagination'
 import Stack from '@mui/material/Stack'
 import { FaPlay } from 'react-icons/fa'
@@ -18,7 +17,6 @@ const Hero = () => {
   const [type, setType] = useState(params.get('path') || 'now_playing')
   const [thumbsSwiper, setThumbsSwiper] = useState(null)
   const [page, setPage] = useState(params.get('count') || 1)
-  const [activeType, setActiveType] = useState('now_playing')
   const { data } = useGetMovieQuery({ type, params: { page } })
 
   useEffect(() => {
@@ -34,31 +32,8 @@ const Hero = () => {
     setParams(p)
   }
 
-  const handleChangeType = path => {
-    setType(path)
-    setActiveType(path)
-    setPage(1)
-    setParams({ path, count: 1 })
-  }
-
   return (
     <main className='w-full h-auto flex flex-col bg-primary px-20 py-5 pb-20 dark:bg-gray-200 max-md:px-5 max-sm:px-4'>
-      <div className='w-full h-20 p-5 flex gap-10 container max-lg:gap-5 max-sm:px-2 max-sm:gap-2'>
-        {MOVIE_LISTS?.map(item => (
-          <button
-            key={item.id}
-            onClick={() => handleChangeType(item.path)}
-            className={`
-              text-xl px-5 pt-2 pb-4 break-words bg-card_bg rounded-lg
-               dark:bg-slate-50 dark:text-primary
-                max-lg:text-lg max-md:text-sm max-sm:text-[10px] max-sm:w-28 max-sm:px-1 max-sm:py-2 max-sm:h-8 max-sm:rounded-md 
-                 ${activeType === item.path ? 'text-red' : 'text-navColor'}`}
-          >
-            {item.title}
-          </button>
-        ))}
-      </div>
-
       <div className='container h-auto'>
         <Swiper
           loop={true}
@@ -122,7 +97,7 @@ const Hero = () => {
           ))}
         </Swiper>
 
-        <Reels data={data}/>
+        <Reels data={data} />
 
         <Stack className='flex items-center justify-center w-full'>
           <MuiPagination

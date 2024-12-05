@@ -49,7 +49,7 @@ const Header = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
           <li className='font-medium text-xs text-navColor'>
             <NavLink to={'/tickets'}>
               <span className='flex flex-col items-center justify-center gap-2 text-lg max-lg:text-sm dark:text-black'>
-                <RiCoupon3Line className='text-2xl' /> Билеты
+                <RiCoupon3Line className='text-2xl' /> жанр
               </span>
             </NavLink>
           </li>
