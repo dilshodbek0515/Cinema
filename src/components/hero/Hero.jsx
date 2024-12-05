@@ -42,7 +42,7 @@ const Hero = () => {
   }
 
   return (
-    <main className='w-full h-[1800px] flex flex-col bg-primary px-20 py-5 pb-20 dark:bg-gray-200 max-md:px-5 max-sm:px-4'>
+    <main className='w-full h-auto flex flex-col bg-primary px-20 py-5 pb-20 dark:bg-gray-200 max-md:px-5 max-sm:px-4'>
       <div className='w-full h-20 p-5 flex gap-10 container max-lg:gap-5 max-sm:px-2 max-sm:gap-2'>
         {MOVIE_LISTS?.map(item => (
           <button
@@ -59,19 +59,19 @@ const Hero = () => {
         ))}
       </div>
 
-      <div className='container h-[640px] mb-32 max-md:-mb-48 max-[500px]:-mb-72'>
+      <div className='container h-auto'>
         <Swiper
           loop={true}
           spaceBetween={10}
           // navigation={true}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Navigation, Thumbs]}
-          className='w-full h-full rounded-2xl max-md:h-[50%] max-md:rounded-md max-[500px]:h-52'
+          className='w-full h-[640px] rounded-2xl max-md:h-[50%] max-md:rounded-md max-[500px]:h-52'
         >
           {data?.results?.map(movie => (
             <SwiperSlide
               key={movie.id}
-              className='flex items-center justify-center rounded-2xl max-md:rounded-md max-[500px]:h-52'
+              className='flex items-center justify-center rounded-2xl max-md:rounded-md'
             >
               <div className='relative w-full h-full'>
                 <img
@@ -86,7 +86,7 @@ const Hero = () => {
                   <div>
                     <p className='text-xl text-white'>{movie.release_date}</p>
                   </div>
-                  <button className='w-96 h-16 flex gap-3 items-center justify-center rounded-xl duration-500 bg-white text-primary hover:bg-transparent hover:border border-white hover:text-white hover:duration-500 max-sm:w-full px-20 max-[400px]:h-10'>
+                  <button className='w-96 h-16 flex gap-3 items-center justify-center rounded-xl duration-500 bg-white text-primary hover:bg-transparent hover:border border-white hover:text-white hover:duration-500 max-sm:w-full px-20 max-sm:h-10'>
                     <FaPlay className='text-2xl' /> Смотреть
                   </button>
                 </div>
