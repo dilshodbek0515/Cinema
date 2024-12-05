@@ -34,7 +34,7 @@ const Index = () => {
           <Route path='/sessions' element={<Sessions />} />
           <Route path='/tickets' element={<Tickets />} />
           <Route path='/search' element={<Search />} />
-          <Route path='/movie/:id' element={<Detail />} />
+          <Route path='/movie/:id' element={<Detail /> } />
         </Route>
       </Routes>
     </div>

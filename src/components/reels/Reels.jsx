@@ -1,16 +1,14 @@
 import React from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { Pagination as SwiperPagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { NavLink, useNavigate } from 'react-router-dom'
 import 'swiper/css'
+import 'swiper/css/free-mode'
+import 'swiper/css/navigation'
+import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
-import { Pagination } from 'swiper/modules'
-import { useGetMovieSimilarQuery } from '../../../redux/api/movieApi'
-import { useParams } from 'react-router-dom'
-
-const Similar = () => {
-  const { id } = useParams()
-  const { data: images } = useGetMovieSimilarQuery(id)
-  console.log(id)
+const Reels = ({ data }) => {
+  const naviagate = useNavigate()
 
   return (
     <section className='w-full bg-primary h-auto pb-10 mt-24 dark:bg-gray-200 max-md:pb-5'>
@@ -26,7 +24,7 @@ const Similar = () => {
             Показать все
           </NavLink>
         </div>
-        <div className='w-full h-auto mt-10'>
+        <div>
           <Swiper
             slidesPerView={1}
             spaceBetween={10}
@@ -35,7 +33,7 @@ const Similar = () => {
               clickable: true
             }}
             breakpoints={{
-              '@0.50': {
+              '@0.00': {
                 slidesPerView: 1,
                 spaceBetween: 5
               },
@@ -50,26 +48,34 @@ const Similar = () => {
               '@1.50': {
                 slidesPerView: 4,
                 spaceBetween: 20
+              },
+              '@1.70': {
+                slidesPerView: 5,
+                spaceBetween: 50
               }
             }}
-            modules={[Pagination]}
-            className='w-full h-[600px] max-lg:h-80 max-md:h-[500px]'
+            modules={[SwiperPagination]}
+            className='w-full h-auto max-md:h-[500px]'
           >
-            {images?.backdrops?.slice(0, 10)?.map(image => (
+            {data?.results?.map((movie, index) => (
               <SwiperSlide
-                key={image.file_path}
-                className='w-72 h-full rounded-lg max-lg:w-80'
+                key={index}
+                className='w-72 h-[500px] rounded-lg max-lg:w-80'
               >
-                <div className='w-full h-full overflow-hidden rounded-lg'>
+                <div className='w-full h-[400px] overflow-hidden rounded-lg'>
                   <img
+                    onClick={() => naviagate(`/movie/${movie.id}`)}
                     className='w-[100%] h-[100%] object-cover rounded-lg max-lg:h-80 hover:scale-110 duration-500 '
-                    src={import.meta.env.VITE_IMAGE_URL + image.file_path}
-                    alt='img'
+                    src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
+                    alt={movie.title}
                   />
                 </div>
                 <h2 className='text-2xl text-white mt-5 mb-2 dark:text-black max-2xl:text-lg'>
-                  {image.vote_count}
+                  {movie.title}
                 </h2>
+                <p className='text-sm text-gray-300 dark:text-black max-lg:text-[12px]'>
+                  {movie.vote_average}
+                </p>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -79,4 +85,4 @@ const Similar = () => {
   )
 }
 
-export default Similar
+export default Reels
