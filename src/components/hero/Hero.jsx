@@ -12,7 +12,7 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
-import Reels from '../reels/reels'
+import Reels from '../reels/Reels'
 const Hero = () => {
   const [params, setParams] = useSearchParams()
   const [type, setType] = useState(params.get('path') || 'now_playing')
