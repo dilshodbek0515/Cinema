@@ -52,7 +52,7 @@ const Search = () => {
         </form>
       </div>
       <Reels data={data} />
-      {!isLoading && !data?.length && (
+      {!data && !data?.length && (
         <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5'>
           <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary' />
           <h2 className='text-navColor text-3xl dark:text-primary max-sm:text-lg'>

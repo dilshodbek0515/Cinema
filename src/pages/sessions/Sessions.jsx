@@ -3,13 +3,13 @@ import { useGetMovieQuery } from '../../redux/api/movieApi'
 import { FaRegWindowClose } from 'react-icons/fa'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import Category from '../../components/category/Category'
-
+import Pagination from '../../components/pagination/Pagination'
 const Sessions = () => {
   const navigate = useNavigate()
   const [params, setParams] = useSearchParams()
   const [type, setType] = useState(params.get('path') || 'now_playing')
   const [page, setPage] = useState(+params.get('count') || 1)
-  const { data } = useGetMovieQuery({ type })
+  const { data } = useGetMovieQuery({ type, params: { page } })
 
   useEffect(() => {
     if (!params.get('path')) {
@@ -20,6 +20,12 @@ const Sessions = () => {
     }
   }, [params])
 
+  const handleChange = (event, value) => {
+    setPage(value)
+    const p = new URLSearchParams(params)
+    p.set('count', value)
+    setParams(p)
+  }
   return (
     <div className='py-10 flex flex-col gap-5 bg-primary dark:bg-slate-200'>
       <Category
@@ -45,6 +51,9 @@ const Sessions = () => {
           </div>
         ))}
       </div>
+
+      <Pagination data={data} page={page} handleChange={handleChange} />
+
       {!data?.total_results && (
         <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5'>
           <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary' />

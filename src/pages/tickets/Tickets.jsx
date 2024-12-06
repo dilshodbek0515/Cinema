@@ -7,10 +7,11 @@ const Tickets = () => {
   const navigate = useNavigate()
   const [selectedGenre, setSelectedGenre] = useState([])
   const { data: genres } = useGetGenreQuery()
-
   const { data, isError } = useGetMovieDiscoverQuery({
-    with_genres: selectedGenre.join(',')
+    with_genres: selectedGenre.join(','),
+    without_genres: '10749,18'
   })
+
   const handleChangeGenre = id => {
     if (selectedGenre.includes(id)) {
       setSelectedGenre(p => p.filter(i => i !== id))
@@ -18,7 +19,6 @@ const Tickets = () => {
       setSelectedGenre(p => [...p, id])
     }
   }
-
   return (
     <div className='py-10 flex flex-col gap-5 bg-primary dark:bg-slate-200'>
       <div className='genres max-w-[1330px] mx-auto overflow-auto flex gap-5 pb-5 rounded-xl max-[1500px]:max-w-[1150px] max-xl:max-w-[900px] max-lg:max-w-[700px] max-md:max-w-[500px] max-sm:max-w-[400px] max-sm:px-0 max-sm:px-2 max-[450px]:max-w-[250px]'>
@@ -49,6 +49,7 @@ const Tickets = () => {
           </div>
         ))}
       </div>
+
       {!data?.total_results && (
         <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5'>
           <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary' />

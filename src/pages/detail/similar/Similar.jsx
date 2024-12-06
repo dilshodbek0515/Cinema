@@ -10,7 +10,6 @@ import { useParams } from 'react-router-dom'
 const Similar = () => {
   const { id } = useParams()
   const { data: images } = useGetMovieSimilarQuery(id)
-  console.log(id)
 
   return (
     <section className='w-full bg-primary h-auto pb-10 mt-24 dark:bg-gray-200 max-md:pb-5'>

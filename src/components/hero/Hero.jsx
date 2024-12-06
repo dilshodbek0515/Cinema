@@ -2,16 +2,15 @@ import React, { useEffect, useState } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules'
 import { useGetMovieQuery } from '../../redux/api/movieApi'
-import MuiPagination from '@mui/material/Pagination'
-import Stack from '@mui/material/Stack'
 import { FaPlay } from 'react-icons/fa'
 import { useSearchParams } from 'react-router-dom'
+import Reels from '../reels/Reels'
+import Pagination from '../pagination/Pagination'
 import 'swiper/css'
 import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
-import 'swiper/css/pagination'
-import Reels from '../reels/Reels'
+
 const Hero = () => {
   const [params, setParams] = useSearchParams()
   const [type, setType] = useState(params.get('path') || 'now_playing')
@@ -99,29 +98,7 @@ const Hero = () => {
 
         <Reels data={data} />
 
-        <Stack className='flex items-center justify-center w-full'>
-          <MuiPagination
-            className='max-w-96 h-10 py-1 rounded-lg bg-slate-900 dark:bg-slate-300'
-            count={data?.total_pages > 500 ? 500 : data?.total_pages}
-            variant='outlined'
-            color='primary'
-            page={page}
-            onChange={handleChange}
-            sx={{
-              '& .MuiPagination-ul': {
-                '& .MuiPaginationItem-root': {
-                  color: 'white',
-                  '@media (max-width: 400px)': {
-                    fontSize: '10px',
-                    padding: '2px',
-                    minWidth: '20px',
-                    height: '20px'
-                  }
-                }
-              }
-            }}
-          />
-        </Stack>
+        <Pagination data={data} page={page} handleChange={handleChange} />
       </div>
     </main>
   )
