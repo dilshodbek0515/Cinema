@@ -43,7 +43,7 @@ const Search = () => {
             value={searchValue}
             onChange={handleChange}
             type='search'
-            className='flex-1 h-full rounded-xl text-lg text-navColor px-5 outline-none py-2 bg-transparent bg-gray-600 max-sm:h-12 max-[400]: w-full'
+            className='flex-1 h-full rounded-xl text-lg text-navColor px-5 outline-none py-2 bg-slate-600 max-sm:h-12 max-[400]: w-full'
             placeholder='Search'
           />
           <button className='search w-52 h-full bg-slate-800 text-navColor border rounded-xl text-xl hover:bg-transparent hover:border border-slate-700 hover:text-slate-700 max-lg:w-auto max-lg:px-5 max-sm:h-12'>
@@ -53,8 +53,8 @@ const Search = () => {
       </div>
       <Reels data={data} />
       {!data && !data?.length && (
-        <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5'>
-          <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary' />
+        <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5 '>
+          <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary max-lg:text-[200px]' />
           <h2 className='text-navColor text-3xl dark:text-primary max-sm:text-lg'>
             Movie not found
           </h2>

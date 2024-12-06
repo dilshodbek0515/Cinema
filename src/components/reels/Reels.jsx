@@ -55,7 +55,7 @@ const Reels = ({ data }) => {
               }
             }}
             modules={[SwiperPagination]}
-            className='w-full h-auto max-md:h-[500px]'
+            className='w-full h-auto max-md:h-auto'
           >
             {data?.results?.map((movie, index) => (
               <SwiperSlide
