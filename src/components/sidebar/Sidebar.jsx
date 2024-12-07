@@ -23,7 +23,7 @@ const Sidebar = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
         transition-transform duration-300 ease-in-out max-w-sm`}
     >
       <div className='flex justify-between'>
-        <Link to={'/'}>
+        <Link to={'/'} onClick={() => setSidebar(false)}>
           <img
             className='w-32 max-sm:w-20'
             src={sidebar_logo}
@@ -36,28 +36,28 @@ const Sidebar = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
       </div>
       <ul className='flex flex-col gap-20 max-xl:gap-5 '>
         <li className='font-medium text-xs text-navColor'>
-          <NavLink to={'/'}>
+          <NavLink to={'/'} onClick={() => setSidebar(false)}>
             <span className='flex flex-col justify-center gap-2 text-lg dark:text-primary'>
               <RiTv2Fill className='text-2xl' /> Афиша
             </span>
           </NavLink>
         </li>
         <li className='font-medium text-xs text-navColor'>
-          <NavLink to={'/sessions'}>
+          <NavLink to={'/sessions'} onClick={() => setSidebar(false)}>
             <span className='flex flex-col justify-center gap-2 text-lg dark:text-primary'>
               <HiMiniDeviceTablet className='text-2xl' /> Сеансы
             </span>
           </NavLink>
         </li>
         <li className='font-medium text-xs text-navColor'>
-          <NavLink to={'/tickets'}>
+          <NavLink to={'/tickets'} onClick={() => setSidebar(false)}>
             <span className='flex flex-col justify-center gap-2 text-lg dark:text-primary'>
               <RiCoupon3Line className='text-2xl' /> Билеты
             </span>
           </NavLink>
         </li>
         <li className='font-medium text-xs text-navColor'>
-          <NavLink to={'/search'}>
+          <NavLink to={'/search'} onClick={() => setSidebar(false)}>
             <span className='flex flex-col  justify-center gap-2 text-lg dark:text-primary'>
               <FiSearch className='text-2xl' /> Поиск
             </span>
@@ -65,7 +65,10 @@ const Sidebar = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
         </li>
       </ul>
 
-      <div className='flex items-center gap-5 flex-wrap'>
+      <div
+        className='flex items-center gap-5 flex-wrap'
+        onClick={() => setSidebar(false)}
+      >
         <button
           onClick={() => darkmode()}
           className='w-10 h-10 rounded-3xl border border-gray-400 flex items-center justify-center dark:border-black'
