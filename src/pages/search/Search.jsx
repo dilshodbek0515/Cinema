@@ -5,6 +5,7 @@ import { useSearchParams } from 'react-router-dom'
 import { FaRegWindowClose, FaSearch } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
 const Search = () => {
+  document.title = 'Search'
   const { t } = useTranslation()
   const [searchValue, setSearchValue] = useState('')
   const [search, setSearch] = useState('')

@@ -6,6 +6,7 @@ import Filim from './filim/Filim'
 import { useTranslation } from 'react-i18next'
 
 const Detail = () => {
+  document.title = 'Detail'
   const { id } = useParams()
   const { data } = useGetMovieDetailQuery(id)
   const [component, setComponent] = useState('bilet')

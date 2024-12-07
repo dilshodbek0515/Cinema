@@ -12,6 +12,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 
 const Hero = () => {
+  document.title = 'Cinema'
   const [params, setParams] = useSearchParams()
   const [type, setType] = useState(params.get('path') || 'now_playing')
   const [thumbsSwiper, setThumbsSwiper] = useState(null)

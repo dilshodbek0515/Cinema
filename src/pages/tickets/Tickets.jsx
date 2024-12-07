@@ -4,6 +4,7 @@ import { useGetGenreQuery } from '../../redux/api/genreApi'
 import { FaRegWindowClose } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 const Tickets = () => {
+  document.title = 'Janr'
   const navigate = useNavigate()
   const [selectedGenre, setSelectedGenre] = useState([])
   const { data: genres } = useGetGenreQuery()
