@@ -7,7 +7,9 @@ import 'swiper/css/free-mode'
 import 'swiper/css/navigation'
 import 'swiper/css/thumbs'
 import 'swiper/css/pagination'
+import { useTranslation } from 'react-i18next'
 const Reels = ({ data }) => {
+  const { t } = useTranslation()
   const naviagate = useNavigate()
 
   return (
@@ -15,13 +17,13 @@ const Reels = ({ data }) => {
       <div className='container h-auto p-5 flex flex-col gap-5'>
         <div className='flex justify-between'>
           <p className='text-2xl text-white dark:text-black max-sm:text-sm'>
-            На неделе
+            {t('reels.not')}
           </p>
           <NavLink
             to={'/sessions'}
             className='text-2xl text-red max-sm:text-sm'
           >
-            Показать все
+            {t('reels.pok')}
           </NavLink>
         </div>
         <div>

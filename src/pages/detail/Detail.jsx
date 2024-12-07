@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useGetMovieDetailQuery } from '../../redux/api/movieApi'
 import { useParams } from 'react-router-dom'
 import Bilet from './bilet/Bilet'
 import Filim from './filim/Filim'
+import { useTranslation } from 'react-i18next'
 
 const Detail = () => {
   const { id } = useParams()
   const { data } = useGetMovieDetailQuery(id)
   const [component, setComponent] = useState('bilet')
-
+  const { t } = useTranslation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div className='bg-primary dark:bg-slate-200 w-full'>
       <div className='w-full min-h-screen relative'>
@@ -43,7 +47,7 @@ const Detail = () => {
             } rounded-xl`}
             onClick={() => setComponent('bilet')}
           >
-            Билеты
+            {t('detail.blet')}
           </button>
           <button
             className={`w-[50%] h-14 ${
@@ -53,7 +57,7 @@ const Detail = () => {
             } rounded-xl`}
             onClick={() => setComponent('filim')}
           >
-            О фильме
+            {t('detail.flim')}
           </button>
         </div>
       </div>

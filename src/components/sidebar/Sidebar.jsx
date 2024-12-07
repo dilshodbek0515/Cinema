@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
 import sidebar_logo from '../../assets/images/logo.svg'
-import flag from '../../assets/images/RU.png'
 import { Link, NavLink } from 'react-router-dom'
 import { RiCoupon3Line, RiTv2Fill } from 'react-icons/ri'
 import { HiMiniDeviceTablet } from 'react-icons/hi2'
 import { FiSearch } from 'react-icons/fi'
-import { IoChevronDownOutline, IoMoon, IoSunny } from 'react-icons/io5'
+import { IoMoon, IoSunny } from 'react-icons/io5'
 import { IoIosCloseCircleOutline } from 'react-icons/io'
 const Sidebar = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
   const darkmode = () => {
@@ -67,12 +66,6 @@ const Sidebar = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
       </ul>
 
       <div className='flex items-center gap-5 flex-wrap'>
-        <div className='flex gap-2 items-center'>
-          <img src={flag} alt='' />
-          <span className='text-navColor dark:text-black'>Ру</span>
-          <IoChevronDownOutline className='text-navColor dark:text-black' />
-        </div>
-
         <button
           onClick={() => darkmode()}
           className='w-10 h-10 rounded-3xl border border-gray-400 flex items-center justify-center dark:border-black'

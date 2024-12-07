@@ -2,22 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: sans-serif;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
 }
-li{
-    color: inherit;
-    list-style: none;
-}
-
-a{
-    text-decoration: none;
-    color: inherit;
+li {
+  color: inherit;
+  list-style: none;
 }
 
-.active{
-    color: red;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.active {
+  color: red;
 }

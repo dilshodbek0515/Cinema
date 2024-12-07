@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import footer_logo from '../../assets/images/footer_logo.svg'
 import google_play from '../../assets/images/play.png'
@@ -16,14 +16,19 @@ import {
 import { FiPhone } from 'react-icons/fi'
 import { IoLogoInstagram } from 'react-icons/io'
 import { PiFacebookLogoBold } from 'react-icons/pi'
+import { useTranslation } from 'react-i18next'
 const Footer = () => {
+  const { t } = useTranslation()
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <footer className='w-full bg-[#111111] dark:bg-gray-200'>
       <div className='container py-10 px-20 h-auto flex justify-between gap-20 flex-wrap max-lg:px-10'>
         <div className='flex flex-col gap-3'>
-          <NavLink>
+          <a href='#'>
             <img className='w-14 mb-8' src={footer_logo} alt='img' />
-          </NavLink>
+          </a>
           <NavLink>
             <img className='w-40 h-12' src={google_play} alt='img' />
           </NavLink>
@@ -32,54 +37,66 @@ const Footer = () => {
           </NavLink>
         </div>
         <div className='flex flex-col gap-5'>
-          <h3 className='text-lg text-white dark:text-black'>О нас</h3>
+          <h3 className='text-lg text-white dark:text-black'>
+            {t('footer.about')}
+          </h3>
           <NavLink className='flex items-center gap-2'>
             <RiFileList2Line className='text-red text-2xl hover:animate-spinY' />
             <span className='text-navColor text-md dark:text-black'>
-              Публичная оферта
+              {t('footer.public')}
             </span>
           </NavLink>
           <NavLink className='flex items-center gap-2'>
             <RiShiningLine className='text-red text-2xl hover:animate-spinY' />
             <span className='text-navColor text-md dark:text-black'>
-              Реклама
+              {t('footer.reck')}
             </span>
           </NavLink>
           <NavLink className='flex items-center gap-2'>
             <RiQuestionLine className='text-red text-2xl hover:animate-spinY' />
-            <span className='text-navColor text-md dark:text-black'>F.A.Q</span>
+            <span className='text-navColor text-md dark:text-black'>
+              {t('footer.faq')}
+            </span>
           </NavLink>
           <NavLink className='flex items-center gap-2'>
             <FiPhone className='text-red text-2xl hover:animate-spinY' />
             <span className='text-navColor text-md dark:text-black'>
-              Контакты
+              {t('footer.contact')}
             </span>
           </NavLink>
         </div>
         <div className='flex flex-col gap-5'>
-          <h3 className='text-lg text-white dark:text-black'>Категории</h3>
+          <h3 className='text-lg text-white dark:text-black'>
+            {t('footer.categore')}
+          </h3>
           <NavLink className='flex items-center gap-2 '>
             <RiMovieLine className='text-red text-2xl hover:animate-spinY ' />
-            <span className='text-navColor text-md  dark:text-black'>Кино</span>
+            <span className='text-navColor text-md  dark:text-black'>
+              {t('footer.kino')}
+            </span>
           </NavLink>
           <NavLink className='flex items-center gap-2'>
             <RiClapperboardLine className='text-red text-2xl  hover:animate-spinY ext-2xl' />
-            <span className='text-navColor text-md dark:text-black'>Театр</span>
+            <span className='text-navColor text-md dark:text-black'>
+              {t('footer.teatr')}
+            </span>
           </NavLink>
           <NavLink className='flex items-center gap-2'>
             <RiMovie2Line className='text-red text-2xl hover:animate-spinY ' />
             <span className='text-navColor text-md dark:text-black'>
-              Концерты
+              {t('footer.konsert')}
             </span>
           </NavLink>
           <NavLink className='flex items-center gap-2'>
             <RiBasketballLine className='text-red text-2xl hover:animate-spinY' />
-            <span className='text-navColor text-md dark:text-black'>Спорт</span>
+            <span className='text-navColor text-md dark:text-black'>
+              {t('footer.sport')}
+            </span>
           </NavLink>
         </div>
-        <div className=''>
+        <div className='flex flex-col'>
           <h3 className='text-lg text-white mb-5 dark:text-black'>
-            Связаться с нами
+            {t('footer.f_contact')}
           </h3>
           <a
             className='text-lg text-red dark:text-black'
@@ -88,7 +105,7 @@ const Footer = () => {
             +998 (95) 897-33-38
           </a>
           <h3 className='text-lg text-white mt-16 dark:text-black'>
-            Социальные сети
+            {t('footer.ceti')}
           </h3>
           <div className='flex gap-5 mt-4'>
             <IoLogoInstagram className='text-red text-2xl hover:animate-spinY' />
