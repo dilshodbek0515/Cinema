@@ -34,7 +34,7 @@ const Header = ({ sidebar, setSidebar, DarcMode, setDarcMode }) => {
         <Link to={'/'}>
           <img className='w-28 max-md:w-20' src={logo} alt='logo' />
         </Link>
-        <ul className='flex gap-20 max-xl:gap-5 max-md:hidden '>
+        <ul className='flex gap-9 max-xl:gap-5 max-md:hidden '>
           <li className='font-medium text-xs text-navColor'>
             <NavLink to={'/'}>
               <span className='flex flex-col items-center justify-center gap-2 text-lg max-lg:text-sm dark:text-black'>

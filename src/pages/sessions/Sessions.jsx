@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useGetMovieQuery } from '../../redux/api/movieApi'
-import { FaRegWindowClose } from 'react-icons/fa'
+import notfound from '../../assets/images/found.png'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import Category from '../../components/category/Category'
 import Pagination from '../../components/pagination/Pagination'
@@ -50,7 +50,7 @@ const Sessions = () => {
           {data?.results?.map((movie, index) => (
             <div
               key={index}
-              className='w-full h-[500px] overflow-hidden rounded-lg max-lg:h-96'
+              className='w-full h-[400px] overflow-hidden rounded-lg max-lg:h-96 relative group'
             >
               <img
                 onClick={() => navigate(`/movie/${movie.id}`)}
@@ -58,6 +58,12 @@ const Sessions = () => {
                 src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
                 alt={movie.title}
               />
+              <h2
+                title={movie.title}
+                className='line-clamp-1 cursor-pointer text-white text-2xl absolute top-[85%] px-10 py-4 bg-[#0000009f] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500'
+              >
+                {movie.title}
+              </h2>
             </div>
           ))}
         </div>
@@ -65,8 +71,8 @@ const Sessions = () => {
         <Pagination data={data} page={page} handleChange={handleChange} />
 
         {!data?.total_results && (
-          <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5'>
-            <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary' />
+          <div className='container px-20 flex items-center justify-center flex-col gap-5 '>
+            <img className='w-96 max-lg:w-[200px]' src={notfound} alt='img' />
             <h2 className='text-navColor text-3xl dark:text-primary max-sm:text-lg'>
               Movie not found
             </h2>

@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useGetMovieSearchQuery } from '../../redux/api/movieApi'
 import Reels from '../../components/reels/Reels'
 import { useSearchParams } from 'react-router-dom'
-import { FaRegWindowClose, FaSearch } from 'react-icons/fa'
+import { FaSearch } from 'react-icons/fa'
 import { useTranslation } from 'react-i18next'
+import notfound from '../../assets/images/found.png'
 const Search = () => {
   document.title = 'Search'
   const { t } = useTranslation()
@@ -56,8 +57,8 @@ const Search = () => {
       </div>
       <Reels data={data} />
       {!data && !data?.length && (
-        <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5 '>
-          <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary max-lg:text-[200px]' />
+        <div className='container px-20 flex items-center justify-center flex-col gap-5 '>
+          <img className='w-96 max-lg:w-[200px]' src={notfound} alt='img' />
           <h2 className='text-navColor text-3xl dark:text-primary max-sm:text-lg'>
             Movie not found
           </h2>

@@ -5,7 +5,7 @@ const CustomPagination = ({ data, page, handleChange }) => {
   return (
     <Stack className='flex items-center justify-center w-full'>
       <MuiPagination
-        className='max-w-96 h-10 py-1 rounded-lg bg-slate-900 dark:bg-slate-300'
+        className='max-w-96 h-10 py-1 rounded-lg bg-slate-950 dark:bg-slate-300'
         count={data?.total_pages > 500 ? 500 : data?.total_pages || 1}
         variant='outlined'
         color='primary'
@@ -14,7 +14,7 @@ const CustomPagination = ({ data, page, handleChange }) => {
         sx={{
           '& .MuiPagination-ul': {
             '& .MuiPaginationItem-root': {
-              color: 'white',
+              color: 'red',
               '@media (max-width: 400px)': {
                 fontSize: '10px',
                 padding: '2px',

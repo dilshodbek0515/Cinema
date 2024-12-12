@@ -1,12 +1,8 @@
-import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { RiVipCrown2Fill } from 'react-icons/ri'
 
 const Bilet = () => {
   const { t } = useTranslation()
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
   return (
     <div className='w-full px-20 h-auto py-32 bg-primary dark:bg-slate-200 max-xl:px-10'>
       <div className='container w-full h-full flex flex-col items-center gap-20'>

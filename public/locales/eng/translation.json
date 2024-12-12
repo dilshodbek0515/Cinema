@@ -1,9 +1,9 @@
 {
   "l": "eng",
   "header": {
-    "home": "Home",
+    "home": "Poster",
     "cate": "Sessions",
-    "janr": "Janr",
+    "janr": "Genre",
     "search": "Search",
     "login": "Login"
   },

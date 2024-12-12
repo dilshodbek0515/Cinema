@@ -1,4 +1,3 @@
-import React, { useEffect } from 'react'
 import single1 from '../../../assets/images/single1.png'
 import single2 from '../../../assets/images/single2.png'
 import { RiCoupon3Fill } from 'react-icons/ri'
@@ -7,9 +6,6 @@ import { useParams } from 'react-router-dom'
 import { useGetMovieDetailQuery } from '../../../redux/api/movieApi'
 import { useTranslation } from 'react-i18next'
 const Filim = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
   const { t } = useTranslation()
   const { id } = useParams()
   const { data } = useGetMovieDetailQuery(id)

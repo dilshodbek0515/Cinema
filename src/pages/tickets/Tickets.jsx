@@ -1,16 +1,20 @@
 import React, { useState } from 'react'
 import { useGetMovieDiscoverQuery } from '../../redux/api/movieApi'
 import { useGetGenreQuery } from '../../redux/api/genreApi'
-import { FaRegWindowClose } from 'react-icons/fa'
-import { useNavigate } from 'react-router-dom'
+import notfound from '../../assets/images/found.png'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import Pagination from '../../components/pagination/Pagination'
 const Tickets = () => {
   document.title = 'Genre'
   const navigate = useNavigate()
   const [selectedGenre, setSelectedGenre] = useState([])
   const { data: genres } = useGetGenreQuery()
-  const { data, isError } = useGetMovieDiscoverQuery({
+  const [params, setParams] = useSearchParams()
+  const [page, setPage] = useState(+params.get('count') || 1)
+  const { data, isError, isLoading } = useGetMovieDiscoverQuery({
     with_genres: selectedGenre.join(','),
-    without_genres: '10749,18'
+    without_genres: '10749,18',
+    page
   })
 
   const handleChangeGenre = id => {
@@ -19,6 +23,12 @@ const Tickets = () => {
     } else {
       setSelectedGenre(p => [...p, id])
     }
+  }
+  const handleChange = (event, value) => {
+    setPage(value)
+    const p = new URLSearchParams(params)
+    p.set('count', value)
+    setParams(p)
   }
   return (
     <div className='py-10 flex flex-col gap-5 bg-primary dark:bg-slate-200'>
@@ -35,25 +45,34 @@ const Tickets = () => {
           </button>
         ))}
       </div>
+
       <div className='container h-auto px-20 grid grid-cols-4 gap-10 max-lg:grid-cols-3 max-lg:gap-y-10 max-md:grid-cols-2 max-md:px-5 max-sm:grid-cols-1'>
         {data?.results?.map((movie, index) => (
           <div
             key={index}
-            className='w-full h-[500px] overflow-hidden rounded-lg max-lg:h-96'
+            className='w-full h-[400px] overflow-hidden rounded-lg max-lg:h-96 relative group'
           >
             <img
               onClick={() => navigate(`/movie/${movie.id}`)}
-              className='w-[100%] h-[100%] object-cover rounded-lg hover:scale-110 duration-500'
+              className='w-[100%] h-[100%] bg-cover rounded-lg hover:scale-110 duration-500 absolute'
               src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
               alt={movie.title}
             />
+            <h2
+              title={movie.title}
+              className='line-clamp-1 cursor-pointer text-white text-xl absolute top-[85%] px-5 py-4 bg-[#0000009f] w-full opacity-0 group-hover:opacity-100 transition-opacity duration-500'
+            >
+              {movie.title}
+            </h2>
           </div>
         ))}
       </div>
 
-      {!data?.total_results && (
-        <div className='container px-20 h-[300px] flex items-center justify-center flex-col gap-5'>
-          <FaRegWindowClose className='text-navColor text-[250px] dark:text-primary' />
+      <Pagination data={data} page={page} handleChange={handleChange} />
+
+      {isLoading && !data?.total_results && (
+        <div className='container px-20 flex items-center justify-center flex-col gap-5 '>
+          <img className='w-96 max-lg:w-[200px]' src={notfound} alt='img' />
           <h2 className='text-navColor text-3xl dark:text-primary max-sm:text-lg'>
             Movie not found
           </h2>

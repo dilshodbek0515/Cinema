@@ -68,16 +68,13 @@ const Reels = ({ data }) => {
                   <img
                     onClick={() => naviagate(`/movie/${movie.id}`)}
                     className='w-[100%] h-[100%] object-cover rounded-lg max-lg:h-80 hover:scale-110 duration-500 '
-                    src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
+                    src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
                     alt={movie.title}
                   />
                 </div>
-                <h2 className='text-2xl text-white mt-5 mb-2 dark:text-black max-2xl:text-lg'>
+                <h2 className='text-xl text-white mt-5 mb-2 dark:text-black max-2xl:text-lg'>
                   {movie.title}
                 </h2>
-                <p className='text-sm text-gray-300 dark:text-black max-lg:text-[12px]'>
-                  {movie.vote_average}
-                </p>
               </SwiperSlide>
             ))}
           </Swiper>

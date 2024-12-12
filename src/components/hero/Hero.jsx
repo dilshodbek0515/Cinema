@@ -38,7 +38,6 @@ const Hero = () => {
         <Swiper
           loop={true}
           spaceBetween={10}
-          // navigation={true}
           thumbs={{ swiper: thumbsSwiper }}
           modules={[FreeMode, Navigation, Thumbs]}
           className='w-full h-[640px] rounded-2xl max-md:h-[50%] max-md:rounded-md max-[500px]:h-52'
@@ -88,7 +87,7 @@ const Hero = () => {
               <div className='w-full h-full'>
                 <img
                   className='w-full h-full object-cover rounded-xl max-md:h-12 max-md:rounded-md max-[400px]:h-[40px]'
-                  src={import.meta.env.VITE_IMAGE_URL + movie.poster_path}
+                  src={import.meta.env.VITE_IMAGE_URL + movie.backdrop_path}
                   width={300}
                   alt={movie.title}
                 />
